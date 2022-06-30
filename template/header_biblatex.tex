@@ -1,0 +1,97 @@
+\usepackage[defernumbers=true,backend=biber,sorting=none,isbn=false,url=false,maxbibnames=999,maxcitenames=1,doi=false,giveninits=true,sortcites=true,citestyle=numeric-comp,eprint=false,hyperref=true]{biblatex}
+
+% reduce size
+\AtBeginBibliography{\footnotesize}
+\setlength\bibitemsep{0.0\itemsep}
+
+% hide unnecessary fields
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryBibitem{\clearfield{day}}
+
+% display all names when using fullcite
+\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
+
+% allow for bold names
+\makeatletter
+\def\nhblx@bibfile@name{\jobname -nhblx.bib}
+\newwrite\nhblx@bibfile
+\immediate\openout\nhblx@bibfile=\nhblx@bibfile@name
+
+\immediate\write\nhblx@bibfile{%
+  @comment{Auto-generated file}\blx@nl}
+
+\newcounter{nhblx@name}
+\setcounter{nhblx@name}{0}
+
+\newcommand*{\nhblx@writenametobib}[1]{%
+  \stepcounter{nhblx@name}%
+  \edef\nhblx@tmp@nocite{%
+    \noexpand\AfterPreamble{%
+      \noexpand\setbox0\noexpand\vbox{%
+        \noexpand\nhblx@getmethehash{nhblx@name@\the\value{nhblx@name}}}}%
+  }%
+  \nhblx@tmp@nocite
+  \immediate\write\nhblx@bibfile{%
+    @misc{nhblx@name@\the\value{nhblx@name}, author = {\unexpanded{#1}}, %
+          options = {dataonly=true},}%
+  }%
+}
+
+\AtEndDocument{%
+  \closeout\nhblx@bibfile}
+
+\addbibresource{\nhblx@bibfile@name}
+
+\newcommand*{\nhblx@boldhashes}{}
+\DeclareNameFormat{nhblx@hashextract}{%
+  \xifinlist{\thefield{hash}}{\nhblx@boldhashes}
+    {}
+    {\listxadd{\nhblx@boldhashes}{\thefield{hash}}}}
+
+\DeclareCiteCommand{\nhblx@getmethehash}
+  {}
+  {\printnames[nhblx@hashextract][1-999]{author}}
+  {}
+  {}
+
+\newcommand*{\addboldbibnames}{\forcsvlist\nhblx@writenametobib}
+\newcommand*{\resetboldbibnames}{\def\nhblx@boldhashes{}}
+
+\newcommand*{\mkboldifhashinlist}[1]{%
+  \xifinlist{\thefield{hash}}{\nhblx@boldhashes}
+    {\mkbibbold{#1}}
+    {#1}}
+\makeatother
+
+\DeclareNameWrapperFormat{boldifhashinlist}{%
+  \renewcommand*{\mkbibcompletename}{\mkboldifhashinlist}%
+  #1}
+
+\DeclareNameWrapperAlias{sortname}{default}
+\DeclareNameWrapperAlias{default}{boldifhashinlist}
+
+
+% only show first and last name
+\DeclareNameFormat{FirstLast}{%
+  \ifthenelse{\value{listtotal}=1}
+    {\namepartgiveni\adddot\addspace\ifblank{\namepartprefix}{}{\namepartprefix\addnbspace}\namepartfamily}
+    {\ifthenelse{\value{listtotal}=2}
+      {\ifthenelse{\value{listcount}<\value{listtotal}}
+        {\namepartgiveni\adddot\addspace\ifblank{\namepartprefix}{}{\namepartprefix\addnbspace}\namepartfamily\addspace}
+        {\bibstring{and}\addspace\namepartgiveni\adddot\addspace\ifblank{\namepartprefix}{}{\namepartprefix\addnbspace}\namepartfamily}}
+      {\ifthenelse{\value{listcount}=1}
+        {\namepartgiveni\adddot\addspace\ifblank{\namepartprefix}{}{\namepartprefix\addnbspace}\namepartfamily\addcomma\addspace\dots\isdot\addcomma}
+        {\ifthenelse{\value{listcount}<\value{listtotal}}
+          {}
+          {\addspace\namepartgiveni\adddot\addspace\ifblank{\namepartprefix}{}{\namepartprefix\addnbspace}\namepartfamily}}%
+      }%
+    }%
+}
+
+
+% define a prefix for own publications
+\DeclareRefcontext{own}{labelprefix=PR}
+\DeclareRefcontext{ownpreprint}{labelprefix=PRP}

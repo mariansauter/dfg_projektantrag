@@ -1,0 +1,61 @@
+\section{Ziele und Arbeitsprogramm}
+
+\subsection{Voraussichtliche Gesamtdauer des Projekts}
+% Bitte geben Sie an
+% * die geplante Laufzeit des Projekts und wie lange die DFG-Mittel benötigt werden,
+% * bei laufenden Projekten: seit wann das Projekt aktiv ist
+
+Das Projekt wird über 36 Monate durchgeführt. Die Finanzierung wird für die gesamte Laufzeit beantragt.
+
+\subsection{Ziele}
+% Bitte geben Sie eine kurze Beschreibung des Forschungsprogramms und der wissenschaftlichen Ziele Ihres Projekts.
+
+\subsection{Arbeitsprogramm inkl. vorgesehener Untersuchungsmethoden}
+% Für jede Antragstellerin und jeden Antragsteller
+% Beschreiben Sie das Arbeitsprogramm.
+
+In einigen Texten haben wir die Möglichkeit, auf die unten definierten Arbeitspakete zu verweisen mit \wpref{1}
+
+\begin{figure}[t]
+    \centering
+    %\includegraphics{content/figures/work-packages.pdf}
+    \begin{ganttchart}{1}{12}
+      \gantttitle{Year 1}{4}
+      \gantttitle{Year 2}{4} 
+      \gantttitle{Year 3}{4} \\
+      \ganttgroup{WP1 (model development)}{1}{8} \\
+      \ganttbar{definition and implementation}{1}{4} \\
+      \ganttbar{refinement}{6}{8}\\
+      \ganttgroup{WP2 (pipeline development)}{1}{10} \\
+      \ganttbar{implementation}{1}{4} \\
+      \ganttbar{refinement}{6}{8} \\
+      \ganttbar{finalization}{10}{10} \\
+      \ganttmilestone{publication}{10} \\
+      \ganttgroup[group/.append style={fill=yellow}]{WP3 (data generation)}{1}{4} \\
+      \ganttbar{simulation}{1}{2} \\
+      \ganttbar[bar/.append style={fill=green}]{sampling design \& collection}{2}{3} \\
+      \ganttbar[bar/.append style={fill=green}]{library generation \& sequencing}{4}{4} \\
+      \ganttgroup[group/.append style={fill=yellow}]{WP4 (model \& pipeline evaluation)}{5}{10} \\
+      \ganttbar[bar/.append style={fill=yellow}]{simulation based}{5}{6} \\
+      \ganttbar[bar/.append style={fill=yellow}]{real data based}{7}{10} \\
+      \ganttmilestone{publication}{10} \\
+      \ganttgroup[group/.append style={fill=green}]{WP5 (application in case study)}{9}{12} \\
+      \ganttbar[bar/.append style={fill=yellow}]{data analysis}{9}{11} \\
+      \ganttbar[bar/.append style={fill=green}]{data interpretation}{11}{12} \\
+      \ganttmilestone{publication}{12}
+      \ganttvrule{}{4}
+      \ganttvrule{}{8}
+      %\ganttlink{proto}{task2}
+    \end{ganttchart}
+    \vspace{-1.6em}
+    \caption{Example Gantt chart.}
+    \label{fig:work-packages}
+\end{figure}
+
+
+% Definieren Sie Arbeitspakete mit \wpdef{number}{PI, months}{title} wie unten
+\wpdef{1}{Name des verantwortlichen PI, Monat 1 - 24}{der Titel des Arbeitspakets}
+
+Beschreibung des Arbeitspakets.
+
+\subsection{Umgang mit Forschungsdaten}

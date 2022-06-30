@@ -1,0 +1,98 @@
+\usepackage{typearea}
+\areaset{17cm}{26cm}
+\usepackage[utf8]{inputenc}
+\usepackage{titling}
+\usepackage{acronym}
+\usepackage[official]{eurosym}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{pgfgantt}
+\usepackage[section]{placeins}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+\usepackage{enumitem}
+
+\newcommand{\applicants}[1]{\newcommand{\theApplicants}{#1}}
+
+\definecolor{yellow}{RGB}{252, 211, 3}
+\definecolor{green}{RGB}{60,179,113}
+\definecolor{blue}{RGB}{3, 165, 252}
+
+\ganttset{canvas/.append style={fill=none, draw=black!10, line width=1pt},
+    hgrid style/.style={draw=black!5, line width=.75pt},
+    vgrid={*1{draw=black!10, line width=1pt}},
+    title/.style={draw=none, fill=none},
+    title label font=\bfseries\footnotesize,
+    y unit title=0.5cm,
+    title height=1,
+    include title in canvas=false,
+    bar label font=\mdseries\footnotesize\color{black!70},
+    bar/.append style={draw=none, fill=blue, opacity=0.4},
+    group/.append style={draw=none, fill=blue},
+    group left shift=0,
+    group right shift=0,
+    group height=.5,
+    group peaks tip position=0,
+    y unit chart=0.5cm,
+    x unit=0.7cm,
+    link/.style={-latex, rounded corners=1pt, black!63},
+    link label font=\footnotesize\bfseries,
+    link label node/.append style={below left=-2pt and 0pt},
+    milestone label font=\footnotesize,
+    group label font=\footnotesize\bfseries,
+}
+
+\renewcommand{\familydefault}{\sfdefault}
+\linespread{1.2}
+
+\DeclareNewSectionCommand[
+  style=section,
+  counterwithin=subsubsection,
+  afterskip=1.5ex plus .2ex,
+  beforeskip=3.25ex plus 1ex minus .2ex,
+  afterindent=false,
+  level=\paragraphnumdepth,
+  tocindent=10em,
+  tocnumwidth=5em
+]{subsubsubsection}
+\setcounter{secnumdepth}{\subsubsubsectionnumdepth}
+\setcounter{tocdepth}{\subparagraphtocdepth}
+
+\RedeclareSectionCommands[
+  level=\numexpr\subsubsubsectionnumdepth+1\relax,
+  toclevel=\numexpr\subsubsubsectiontocdepth+1\relax,
+  increaselevel
+]{paragraph,subparagraph}
+\RedeclareSectionCommand[
+  counterwithin=subsubsubsection,
+  tocindent=12em,
+  tocnumwidth=6em
+]{paragraph}
+\RedeclareSectionCommand[
+  tocindent=14em,
+  tocnumwidth=7em
+]{subparagraph}
+
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\wpdef}[3]{\hypertarget{wp#1}{\subsubsection*{WP#1 {\normalfont(#2)}: #3}}}
+\newcommand{\wpref}[1]{\protect\hyperlink{wp#1}{\textbf{WP#1}}}
+
+% always use "section" when referring to sub and subsubsections
+\let\subsectionautorefname\sectionautorefname
+\let\subsubsectionautorefname\sectionautorefname
+
+  
+% spacing
+
+\RedeclareSectionCommand[
+  runin=true,
+  beforeskip=.1\baselineskip]{paragraph}
+
+\input{template/header_biblatex}
+\input{template/header_tblr}
+
+\addbibresource{content/02_literatur.bib}
+
+\input{content/01_aux_header}

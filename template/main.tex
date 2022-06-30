@@ -1,0 +1,66 @@
+% DFG-Forschungsförderung Programmantragsvorlage Sachbeihilfe
+% Autor (Englisch): Johannes Köster
+% Übersetzung: Marian Sauter, sauter.marian@gmail.com
+%
+% Eine Vorlage für Anträge im Rahmen der Forschungsförderung der Deutschen Forschungsgemeinschaft (DFG). Entspricht dem DFG-Vordruck 54.01 - 03/22.
+% --------------------------------------------------------------
+% Lizenz: Creative Commons CC BY 4.0
+% --------------------------------------------------------------
+
+
+\documentclass[11pt,DIV=16,parskip=half]{scrartcl}
+\input{header}
+\input{content/00_meta}
+
+\begin{document}
+
+\textbf{Beschreibung des Vorhabens - Projektanträge}
+\vspace{2em}
+
+\textbf{\theApplicants}
+\vspace{1em}
+
+\textbf{\thetitle}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{\Large Beschreibung des Vorhabens}
+
+\input{content/04_ausgangslage}
+
+\subsection{Projektbezogenes Publikationsverzeichnis Ihrer Arbeiten}
+% Kapitel 1.2.1 und Kapitel 1.2.2 zusammen maximal 10 Arbeiten, bitte durchnummerieren
+\subsubsection{Veröffentlichte Arbeiten aus Publikationsorganen mit wissenschaftlicher Qualitätssicherung, Buchveröffentlichungen sowie bereits zur Veröffentlichung angenommene, aber noch nicht veröffentlichte Arbeiten.}
+
+\newrefcontext{own}
+\printbibliography[keyword=own,heading=none,resetnumbers=true]
+
+\subsubsection{Andere Veröffentlichungen mit und ohne wissenschaftliche Qualitätssicherung}
+
+\newrefcontext{ownpreprint}
+\printbibliography[keyword=ownpreprint,heading=none,resetnumbers=true]
+
+\input{content/05_patente}
+
+\input{content/06_ziele_und_arbeitsprogramm}
+
+\input{content/07_diversitaet}
+
+\section{Literaturverzeichnis zum Stand der Forschung, zu den Zielen und dem Arbeitsprogramm}
+
+\resetboldbibnames
+\newrefcontext
+\DeclareNameAlias{author}{FirstLast}
+\printbibliography[heading=none,notkeyword=own,notkeyword=ownpreprint,resetnumbers=true]
+
+\input{content/08_begleitinformationen}
+
+\subsubsection{Benutzte Abkürzungen}
+\input{content/03_acronyme}
+
+
+\input{content/09_module}
+
+\end{document}
